@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+// Minimal implementation without using C++ standard library headers.
 
 namespace sjtu {
     class CrossArray{
@@ -106,40 +105,7 @@ namespace sjtu {
     };
 }
 
-// Minimal harness: parse commands from stdin for basic sanity tests.
-// Not required by OJ hidden tests but helps local runs.
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    // Simple protocol:
-    // L Q
-    // then Q commands among: INS k a1..ak | APP i k b1..bk | AT i j | LEN | DBL | AR i
-    int L, Q;
-    if (!(cin >> L)) return 0;
-    cin >> Q;
-    sjtu::CrossArray ca(L);
-    while (Q--) {
-        string op; cin >> op;
-        if (op == "INS") {
-            int k; cin >> k; vector<int> v(k); for (int i=0;i<k;++i) cin>>v[i];
-            cout << (ca.InsertArrays(v.data(), k) ? "T" : "F") << '\n';
-        } else if (op == "APP") {
-            int line,k; cin >> line >> k; vector<int> v(k); for(int i=0;i<k;++i)cin>>v[i];
-            ca.AppendArrays(v.data(), line, k);
-            cout << "OK\n";
-        } else if (op == "AT") {
-            int i,j; cin >> i >> j; cout << ca.At(i,j) << '\n';
-        } else if (op == "LEN") {
-            long long sum=0; for(int i=0;i<L;++i){ const int *p = ca.AtArray(i); if(p) { // need sizes: not exposed
-                    // Skip – harness not perfect
-                }}
-            cout << "?\n";
-        } else if (op == "DBL") {
-            ca.DoubleCrossLength(); cout << "OK\n";
-        } else if (op == "AR") {
-            int i; cin >> i; auto p = ca.AtArray(i); cout << (p? p[0] : -1) << '\n';
-        }
-    }
+    // Intentionally empty: class is assessed by the judge's harness.
     return 0;
 }
-
